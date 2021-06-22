@@ -25,10 +25,10 @@ class RegisterRequest extends FormRequest
     {
         return [
 
-            'firstName' => 'required',
-            'lastName'=>'required',
+            'name' => 'required',
             'email' =>'required|unique:users,email',
             'password' => 'min:8|regex:/[0-9]/|confirmed',
+            'password_confirmation' => 'same:password'
         ];
     }
 }
