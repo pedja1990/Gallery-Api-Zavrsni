@@ -28,18 +28,18 @@ class AuthController extends Controller
     }
 
     public function register(RegisterRequest $request){
-      $data = $request->validated();
+        $data = $request->validated();
 
-      $data['password'] = Hash::make($data['password']);
-      $user = User::create($data);
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
 
-      $token = auth('api')->login($user);
+        $token = auth('api')->login($user);
 
-      return [
-        'token' => $token,
-        'user' => $user
-      ];
-    }
+        return [
+          'token' => $token,
+          'user' => $user
+        ];
+      }
 
     public function logout(){
 
@@ -56,8 +56,8 @@ class AuthController extends Controller
 
     public function refreshToken(){
 
-      $token = auth('api')->refresh();
 
+      $token = auth('api')->refresh();
       return [
         'token' => $token
       ];
