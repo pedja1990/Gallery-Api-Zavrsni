@@ -8,12 +8,11 @@ use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
-
-    public function index(){
-
-        $results = Gallery::with('user', 'images');
+    public function index(Request $request)
+    {
+        $name = $request->query('name', '');
+        $results = Gallery::search($name)->orderBy('id','DESC')->with('images')->with('user');
         $galleries = $results->get();
-
         return response()->json($galleries);
     }
     public function store(CreateGalleryRequest $request){
