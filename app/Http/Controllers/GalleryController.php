@@ -11,8 +11,10 @@ class GalleryController extends Controller
 
     public function index(){
 
-       return Gallery::all();
+        $results = Gallery::with('user', 'images');
+        $galleries = $results->get();
 
+        return response()->json($galleries);
     }
     public function store(CreateGalleryRequest $request){
         $data = $request->all();
@@ -22,8 +24,21 @@ class GalleryController extends Controller
     public function show($id){
 
         $gallery = Gallery::findOrFail($id);
+        $images = $gallery->images;
 
-        return $gallery;
+        $user = $gallery->user;
+        $results= [
+            'id' => $gallery->id,
+            'name'=>$gallery->name,
+            'description'=>$gallery->description,
+            'created_at'=>$gallery->created_at,
+            'updated_at'=>$gallery->updated_at,
+            'images'=>$images,
+            'user'=>$user,
+
+        ];
+
+        return response()->json($results);
 
     }
     public function update(Request $request, $id){

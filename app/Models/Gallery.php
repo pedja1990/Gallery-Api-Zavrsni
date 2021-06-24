@@ -24,4 +24,12 @@ class Gallery extends Model
     }
 
 
+    public function addImages($source, $id) {
+        return $this->images()->create([
+            'source' => $source,
+            'gallery_id' => $id
+        ]);
+    }
+
+
 }
