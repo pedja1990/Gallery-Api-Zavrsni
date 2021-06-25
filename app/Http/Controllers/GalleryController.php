@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\User;
 use App\Http\Requests\CreateGalleryRequest;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,11 @@ class GalleryController extends Controller
         $name = $request->query('name', '');
         $results = Gallery::search($name)->orderBy('id','DESC')->with('images')->with('user');
         $galleries = $results->get();
+
         return response()->json($galleries);
     }
     public function store(CreateGalleryRequest $request){
+
         $data = $request->all();
 
         return Gallery::create($data);

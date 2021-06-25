@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,7 @@ use App\Http\Controllers\AuthController;
 // });
 
 
+
 Route::middleware('api')->get('/galleries', [GalleryController::class,'index']);
 Route::middleware('api')->get('/galleries/{id}',[GalleryController::class,'show']);
 Route::middleware('api')->post('/galleries', [GalleryController::class,'store']);
@@ -34,3 +37,4 @@ Route::post('logout', [ AuthController::class, 'logout' ])->middleware('auth:api
 Route::get('me', [ AuthController::class, 'me' ])->middleware('auth:api');
 
 
+Route::middleware('api')->get('/user/{id}',[UserController::class,'show']);
