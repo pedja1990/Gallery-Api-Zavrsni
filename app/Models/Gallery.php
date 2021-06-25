@@ -35,5 +35,11 @@ class Gallery extends Model
         return self::where("name", "LIKE", "%$name%");
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+
+
 
 }

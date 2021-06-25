@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             GallerySeeder::class,
-            ImageSeeder::class
+            ImageSeeder::class,
+            CommentSeeder::class
 
         ]);
 

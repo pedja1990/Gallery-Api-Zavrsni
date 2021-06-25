@@ -12,9 +12,8 @@ class GalleryController extends Controller
     public function index(Request $request)
     {
         $name = $request->query('name', '');
-        $results = Gallery::search($name)->orderBy('id','DESC')->with('images')->with('user');
+        $results = Gallery::search($name)->orderBy('id','DESC')->with('images')->with('user')->with('comments');
         $galleries = $results->get();
-
         return response()->json($galleries);
     }
     public function store(CreateGalleryRequest $request){
@@ -27,6 +26,7 @@ class GalleryController extends Controller
 
         $gallery = Gallery::findOrFail($id);
         $images = $gallery->images;
+        $comments = $gallery->comments;
 
         $user = $gallery->user;
         $results= [
@@ -37,6 +37,7 @@ class GalleryController extends Controller
             'updated_at'=>$gallery->updated_at,
             'images'=>$images,
             'user'=>$user,
+            'comments'=>$comments
 
         ];
 

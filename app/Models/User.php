@@ -43,16 +43,24 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     public function galleries() {
+
         return $this->hasMany(Gallery::class);
     }
 
+    public function comments() {
 
-    public function getJWTIdentifier()
-    {return$this->getKey();
+        return $this->hasMany(Comment::class);
+    }
+
+
+    public function getJWTIdentifier(){
+
+        return$this->getKey();
     }
 
 
     public function getJWTCustomClaims(){
+
         return[];
 
     }
