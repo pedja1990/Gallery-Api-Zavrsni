@@ -27,7 +27,8 @@ class CreateGalleryRequest extends FormRequest
             //
             "name"=> "required | string | min:2 | max:255",
             "description"=>'sometimes | string | max:1000',
-            'source' => ['required','string','url', 'regex:/.(jpg|png)($|\?.*)/'] // (http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))
+            'source' => ['required','string','url', 'regex:/.(jpg|png)($|\?.*)/'], // (http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))
+            'user_id' => 'required | string | unique: galleries.users'
         ];
     }
 }
